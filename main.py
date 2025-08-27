@@ -1,6 +1,6 @@
 import click
 from datetime import datetime
-from crud import add_new_organizer,add_new_participant,add_new_event,add_event_participant,view_all_events
+from crud import add_new_organizer,add_new_participant,add_new_event,add_event_participant,view_all_events,delete_event
 
 
 
@@ -47,8 +47,14 @@ while True:
             click.secho("view existing events",fg="green")
             view_all_events()
 
-        
 
+        if event_option==3:
+            click.secho("Delete event",fg="red")
+            title=click.prompt("enter event title")
+            delete_event(title)
+            
+
+        
 
 
 

@@ -38,7 +38,7 @@ def add_new_event(title, description, date, location, organizer_id=None):
 def view_all_events():
     events = session.query(Event).all()
     if not events:
-        print("⚠️ No events found.")
+        print("No events found.")
         return
     print("\n--- All Events ---")
     for event in events:
@@ -50,7 +50,16 @@ def view_all_events():
         print(f"Organizer ID: {event.organizer_id}")
         print("------------------")
 
-    
+def delete_event(title):
+    event = session.query(Event).filter_by(title=title).first()
+    if not event:
+        print(f" Event with title {title} not found.")
+        return False
+    session.delete(event)
+    session.commit()
+    print(f" Event '{title}' deleted successfully.")
+    return True
+  
 
 
 def add_event_participant(event_id, participant_id, role="attendee", registration_date=None):
