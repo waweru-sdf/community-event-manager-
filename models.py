@@ -11,3 +11,11 @@ class Organaizer(Base):
     email=Column(String(40),nullable=False)
     Phone=Column(Integer)
     organization=Column(String(20))
+
+class Event(Base):
+    _tablename_="event"
+    id=Column(Integer,primary_key=True)
+    title=Column(String)
+    description=Column(Text)
+    date=Column(DateTime)
+    location=Column(String)
