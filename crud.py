@@ -24,6 +24,7 @@ def add_new_participant(name, email, phone, age):
 
 
 def add_new_event(title, description, date, location, organizer_id=None):
+
     new_event = Event(
         title=title,
         description=description,
@@ -33,6 +34,7 @@ def add_new_event(title, description, date, location, organizer_id=None):
     )
     session.add(new_event)
     session.commit()
+    
 
 
 def add_event_participant(event_id, participant_id, role="attendee", registration_date=None):
