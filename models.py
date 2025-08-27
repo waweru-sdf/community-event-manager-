@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, Date, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, Date, ForeignKey,create_engine
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base
 
 Base = declarative_base()
@@ -51,7 +51,7 @@ class EventParticipant(Base):
     participant = relationship("Participant", back_populates="event_participations")
 
 
-engine = create_engine("sqlite:///Events.db")
+engine = create_engine("sqlite:///Events.db",echo=True)
 Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 session = Session()
