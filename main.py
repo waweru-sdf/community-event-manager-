@@ -1,6 +1,6 @@
 import click
 from datetime import datetime
-from crud import add_new_organizer,add_new_participant,add_new_event,add_event_participant
+from crud import add_new_organizer,add_new_participant,add_new_event,add_event_participant,view_all_events
 
 
 
@@ -44,7 +44,10 @@ while True:
                 click.secho(f"error adding department")
 
         if event_option==2:
-            click.secho("view existing events",fg="pink")
+            click.secho("view existing events",fg="green")
+            view_all_events()
+
+        
 
 
 

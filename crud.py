@@ -34,6 +34,22 @@ def add_new_event(title, description, date, location, organizer_id=None):
     )
     session.add(new_event)
     session.commit()
+
+def view_all_events():
+    events = session.query(Event).all()
+    if not events:
+        print("⚠️ No events found.")
+        return
+    print("\n--- All Events ---")
+    for event in events:
+        print(f"ID: {event.id}")
+        print(f"Title: {event.title}")
+        print(f"Description: {event.description}")
+        print(f"Date: {event.date}")
+        print(f"Location: {event.location}")
+        print(f"Organizer ID: {event.organizer_id}")
+        print("------------------")
+
     
 
 
