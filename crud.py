@@ -18,4 +18,17 @@ def add_new_event(event_id,title,description,date,location,organization_id=none)
     new_event=Event(event_id=event_id,title=title,description=description,date=date,location=location,organization_id=organization_id)
     session.add(new_event)
     session.commit()
-    
+
+
+
+
+def add_event_participant(event_participant_id, event_id, participant_id, role="attendee",date=none):
+    event_participant = EventParticipant(
+        event_participant_id=event_participant_id
+        event_id=event_id,
+        participant_id=participant_id,
+        role=role,
+        date=date
+    )
+    session.add(event_participant)
+    session.commit()
