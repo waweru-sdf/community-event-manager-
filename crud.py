@@ -1,6 +1,6 @@
 from models import Organizer, Event, EventParticipant, Participant, session
 
-
+# CRUD OPERATION FOR ORGANIZER
 def add_new_organizer(name, email, phone, organization):
     new_organizer = Organizer(
         name=name,
@@ -23,6 +23,17 @@ def view_all_organizers():
         print(f"phone: {organizer.phone}")
         print(f"Organization: {organizer.organization}")
         print("------------------")
+
+def delete_organizer(organizer_id):
+    organizer = session.query(Organizer).filter_by(id=organizer_id).first()
+    if not organizer:
+        print(f" Organizer with id {organizer_id} not found.")
+        return False
+    session.delete(organizer)
+    session.commit()
+    print(f" organizer '{organizer_id}' deleted successfully.")
+    return True
+#  END OF CRUD OPERATION FOR ORGANIZER
 
 def add_new_participant(name, email, phone, age):
     new_participant = Participant(

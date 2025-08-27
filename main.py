@@ -1,6 +1,6 @@
 import click
 from datetime import datetime
-from crud import add_new_organizer,add_new_participant,add_new_event,add_event_participant,view_all_events,delete_event,view_all_organizers
+from crud import add_new_organizer,add_new_participant,add_new_event,add_event_participant,view_all_events,delete_event,view_all_organizers,delete_organizer
 
 
 
@@ -52,6 +52,8 @@ while True:
             title=click.prompt("enter event title")
             delete_event(title)
 # INPUT 1 END CODE ..........
+
+
 #INPUT 2 = MATTERS ORGANIZATION
     if user_input==2:
         click.secho("Organizer Options", fg='blue')
@@ -78,7 +80,10 @@ while True:
             click.secho("view existing organizers",fg="green")
             view_all_organizers()
         
-  
+        if organizer_option==3:
+            click.secho("Delete organizer",fg="red")
+            organizer_id=click.prompt("enter organizers id" ,type=int)
+            delete_organizer(organizer_id)
 
             
 
