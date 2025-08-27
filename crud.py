@@ -10,7 +10,19 @@ def add_new_organizer(name, email, phone, organization):
     )
     session.add(new_organizer)
     session.commit()
-
+def view_all_organizers():
+    organizers = session.query(Organizer).all()
+    if not Organizer:
+        print("No events found.")
+        return
+    print("\n--- All Organizers ---")
+    for organizer in organizers:
+        print(f"ID: {organizer.id}")
+        print(f"Name: {organizer.name}")
+        print(f"Email: {organizer.email}")
+        print(f"phone: {organizer.phone}")
+        print(f"Organization: {organizer.organization}")
+        print("------------------")
 
 def add_new_participant(name, email, phone, age):
     new_participant = Participant(

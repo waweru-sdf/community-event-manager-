@@ -1,6 +1,6 @@
 import click
 from datetime import datetime
-from crud import add_new_organizer,add_new_participant,add_new_event,add_event_participant,view_all_events,delete_event
+from crud import add_new_organizer,add_new_participant,add_new_event,add_event_participant,view_all_events,delete_event,view_all_organizers
 
 
 
@@ -72,6 +72,12 @@ while True:
 
         except Exception as e:
                 click.secho(f"error adding organizer")
+
+
+        if organizer_option==2:
+            click.secho("view existing organizers",fg="green")
+            view_all_organizers()
+        
   
 
             
