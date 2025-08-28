@@ -35,6 +35,8 @@ def delete_organizer(organizer_id):
     return True
 #  END OF CRUD OPERATION FOR ORGANIZER
 
+
+# CRUD OPERATIONS FOR PARTICIPANTS 
 def add_new_participant(name, email, phone, age):
     new_participant = Participant(
         name=name,
@@ -44,6 +46,31 @@ def add_new_participant(name, email, phone, age):
     )
     session.add(new_participant)
     session.commit()
+
+
+def view_all_participants():
+    participants = session.query(Participant).all()
+    if not Participant:
+        print("No participant found.")
+        return
+    print("\n--- All Participants ---")
+    for participant in participants:
+        print(f"ID: {participant.id}")
+        print(f"Name: {participant.name}")
+        print(f"Email: {participant.email}")
+        print(f"phone: {participant.phone}")
+        print(f"Age: {participant.age}")
+        print("------------------")
+
+def delete_participant(participant_id):
+    participant = session.query(Participant).filter_by(id=participant_id).first()
+    if not participant:
+        print(f" participant with id {participant_id} not found.")
+        return False
+    session.delete(participant)
+    session.commit()
+    print(f" participant '{participant_id}' deleted successfully.")
+    return True
 
 # CRUD OPERATION ON EVENTS
 def add_new_event(title, description, date, location, organizer_id=None):

@@ -1,6 +1,6 @@
 import click
 from datetime import datetime
-from crud import add_new_organizer,add_new_participant,add_new_event,add_event_participant,view_all_events,delete_event,view_all_organizers,delete_organizer
+from crud import add_new_organizer,add_new_participant,add_new_event,add_event_participant,view_all_events,delete_event,view_all_organizers,delete_organizer,view_all_participants,delete_participant
 
 
 
@@ -108,8 +108,16 @@ while True:
             add_new_participant(name,email,phone,age)
             click.secho(f"participant with the name {name} added successfully")
         except Exception as e:
-            click.secho(f"error adding participant with the name {name}")
+            click.secho("error adding participant with the name")
 
+        if particpant_option==2:
+            click.secho("This are all the participants ")
+            view_all_participants()
+
+        if particpant_option ==3:
+            click.secho("Delete participant",fg="red")
+            participant_id=click.prompt("enter participant id" ,type=int)
+            delete_participant(participant_id)
 
 
 
