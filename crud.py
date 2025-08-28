@@ -72,6 +72,8 @@ def delete_participant(participant_id):
     print(f" participant '{participant_id}' deleted successfully.")
     return True
 
+# END OF CRUD OPERATION ON PARTICIPANTS
+
 # CRUD OPERATION ON EVENTS
 def add_new_event(title, description, date, location, organizer_id=None):
 
@@ -109,7 +111,8 @@ def delete_event(title):
     session.commit()
     print(f" Event '{title}' deleted successfully.")
     return True
-  
+
+
 # END OF CRUD OPERATIONS ON EVENT
 
 def add_event_participant(event_id, participant_id, role="attendee", registration_date=None):

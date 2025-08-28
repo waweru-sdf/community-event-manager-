@@ -119,6 +119,39 @@ while True:
             participant_id=click.prompt("enter participant id" ,type=int)
             delete_participant(participant_id)
 
+# INPUT 3 END CODE .......................
+
+
+# OPTION 4 EVENT PARTICIPANTS OPTION
+
+    if user_input == 4:
+        click.secho("Welcome to option 4 ")
+        click.secho("1 enter event participant",fg="blue")
+        click.secho("2 view event participants",fg="blue")
+        click.secho("3 delete event participant",fg="blue")
+
+        evp_option=click.prompt("enter option",type=int)
+        if evp_option == 1:
+            click.secho("Adding new participant........")
+            event_id=click.prompt("enter event id")
+            participant_id=click.prompt("enter participant id")
+            role=click.prompt("enter participants role")
+            registration_date=click.prompt("enter the date on which the participant registered")
+    
+        try:
+            add_event_participant(event_id,participant_id,role,registration_date)
+            click.secho("event participant added successfully")
+        except Exception as e:
+            click.secho("not added")
+
+
+
+        
+
+
+
+
+
 
 
 
