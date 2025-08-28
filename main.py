@@ -84,8 +84,38 @@ while True:
             click.secho("Delete organizer",fg="red")
             organizer_id=click.prompt("enter organizers id" ,type=int)
             delete_organizer(organizer_id)
-
+# INPUT 2 END CODE ...................
             
+
+# INPUT 3 = PARTICIPANT 
+
+    if user_input == 3 :
+        click.secho("Welcome to participants option")
+        click.secho("1 Add participant ",fg="green")
+        click.secho("2 view participants",fg="green")
+        click.secho("3 Delete participant ",fg="green")
+
+        particpant_option = click.prompt("enter option",type=int)
+
+
+        if particpant_option ==1:
+            click.secho("adding new participant ............",fg="yellow")
+            name=click.prompt("enter participants name ")
+            email=click.prompt("enter participants email")
+            phone=click.prompt("enter participants phone")
+            age=click.prompt("enter participants age")
+        try:
+            add_new_participant(name,email,phone,age)
+            click.secho(f"participant with the name {name} added successfully")
+        except Exception as e:
+            click.secho(f"error adding participant with the name {name}")
+
+
+
+
+
+
+
 
         
 

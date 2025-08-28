@@ -55,3 +55,4 @@ engine = create_engine("sqlite:///Events.db",echo=True)
 Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 session = Session()
+
