@@ -1,7 +1,9 @@
 from models import Organizer, Event, EventParticipant, Participant, session
 
-# CRUD OPERATION FOR ORGANIZER
-def add_new_organizer(name, email, phone, organization):
+
+# -------------------- CRUD OPERATIONS FOR ORGANIZER -------------------- #
+
+def add_organizer(name, email, phone, organization):
     new_organizer = Organizer(
         name=name,
         email=email,
@@ -10,34 +12,37 @@ def add_new_organizer(name, email, phone, organization):
     )
     session.add(new_organizer)
     session.commit()
+
+
 def view_all_organizers():
     organizers = session.query(Organizer).all()
-    if not Organizer:
-        print("No events found.")
+    if not organizers:
+        print("No organizers found.")
         return
     print("\n--- All Organizers ---")
     for organizer in organizers:
         print(f"ID: {organizer.id}")
         print(f"Name: {organizer.name}")
         print(f"Email: {organizer.email}")
-        print(f"phone: {organizer.phone}")
+        print(f"Phone: {organizer.phone}")
         print(f"Organization: {organizer.organization}")
         print("------------------")
+
 
 def delete_organizer(organizer_id):
     organizer = session.query(Organizer).filter_by(id=organizer_id).first()
     if not organizer:
-        print(f" Organizer with id {organizer_id} not found.")
+        print(f"Organizer with id {organizer_id} not found.")
         return False
     session.delete(organizer)
     session.commit()
-    print(f" organizer '{organizer_id}' deleted successfully.")
+    print(f"Organizer '{organizer_id}' deleted successfully.")
     return True
-#  END OF CRUD OPERATION FOR ORGANIZER
 
 
-# CRUD OPERATIONS FOR PARTICIPANTS 
-def add_new_participant(name, email, phone, age):
+# -------------------- CRUD OPERATIONS FOR PARTICIPANTS -------------------- #
+
+def add_participant(name, email, phone, age):
     new_participant = Participant(
         name=name,
         email=email,
@@ -50,33 +55,33 @@ def add_new_participant(name, email, phone, age):
 
 def view_all_participants():
     participants = session.query(Participant).all()
-    if not Participant:
-        print("No participant found.")
+    if not participants:
+        print("No participants found.")
         return
     print("\n--- All Participants ---")
     for participant in participants:
         print(f"ID: {participant.id}")
         print(f"Name: {participant.name}")
         print(f"Email: {participant.email}")
-        print(f"phone: {participant.phone}")
+        print(f"Phone: {participant.phone}")
         print(f"Age: {participant.age}")
         print("------------------")
+
 
 def delete_participant(participant_id):
     participant = session.query(Participant).filter_by(id=participant_id).first()
     if not participant:
-        print(f" participant with id {participant_id} not found.")
+        print(f"Participant with id {participant_id} not found.")
         return False
     session.delete(participant)
     session.commit()
-    print(f" participant '{participant_id}' deleted successfully.")
+    print(f"Participant '{participant_id}' deleted successfully.")
     return True
 
-# END OF CRUD OPERATION ON PARTICIPANTS
 
-# CRUD OPERATION ON EVENTS
+# -------------------- CRUD OPERATIONS FOR EVENTS -------------------- #
+
 def add_new_event(title, description, date, location, organizer_id=None):
-
     new_event = Event(
         title=title,
         description=description,
@@ -86,6 +91,7 @@ def add_new_event(title, description, date, location, organizer_id=None):
     )
     session.add(new_event)
     session.commit()
+
 
 def view_all_events():
     events = session.query(Event).all()
@@ -102,25 +108,27 @@ def view_all_events():
         print(f"Organizer ID: {event.organizer_id}")
         print("------------------")
 
+
 def delete_event(title):
     event = session.query(Event).filter_by(title=title).first()
     if not event:
-        print(f" Event with title {title} not found.")
+        print(f"Event with title '{title}' not found.")
         return False
     session.delete(event)
     session.commit()
-    print(f" Event '{title}' deleted successfully.")
+    print(f"Event '{title}' deleted successfully.")
     return True
 
 
-# END OF CRUD OPERATIONS ON EVENT
+# -------------------- OPERATION FOR EVENT PARTICIPANTS -------------------- #
 
-def add_event_participant(event_id, participant_id, role="attendee", registration_date=None):
+def add_event_participant(event_id, participant_id, role, registration_date):
     event_participant = EventParticipant(
         event_id=event_id,
         participant_id=participant_id,
         role=role,
-        registration_date=registration_date
+        registration_date=registration_date  
     )
     session.add(event_participant)
     session.commit()
+

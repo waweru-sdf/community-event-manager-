@@ -1,166 +1,124 @@
-import click
 from datetime import datetime
-from crud import add_new_organizer,add_new_participant,add_new_event,add_event_participant,view_all_events,delete_event,view_all_organizers,delete_organizer,view_all_participants,delete_participant
-
+import click
+from crud import (add_new_event, view_all_events, delete_event, add_participant, view_all_participants, delete_participant, add_organizer, view_all_organizers, delete_organizer,add_event_participant)
 
 
 while True:
-    click.secho("welcome to The community event manager app",fg='green')
-    click.secho("Select an option before proceeding",fg='blue')
-    click.secho("1 Event",fg='yellow')
-    click.secho("2 organizer",fg='yellow')
-    click.secho("3 participant",fg='yellow')
-    click.secho("4 Event_participants",fg='yellow')
-    click.secho("5 Exit",fg='red')
-
+    click.secho("Welcome to The Community Event Manager App", fg='green')
+    click.secho("Select an option before proceeding", fg='blue')
+    click.secho("1 Event", fg='yellow')
+    click.secho("2 Participant", fg='yellow')
+    click.secho("3 Organizer", fg='yellow')
+    click.secho("4 Event Participants", fg='yellow')
+    click.secho("5 Exit", fg='red')
 
     user_input = click.prompt("Select option", type=int)
-# OPTION 1 = MATTERS EVENT
-    if user_input ==1:
-        click.secho("Event Options", fg='blue')
-        click.secho("1 Add New event", fg='yellow')
-        click.secho("2 View  event", fg='yellow')
-        click.secho("3 Delete event", fg='yellow')
 
-        event_option= click.prompt("select event option",type=int)
+    # ---------------- EVENT MENU ----------------
+    if user_input == 1:
+        click.secho("Event Options", fg='blue')
+        click.secho("1 View Events", fg='yellow')
+        click.secho("2 Add Events", fg='yellow')
+        click.secho("3 Delete Event", fg='yellow')
+
+        event_option = click.prompt("Select event option", type=int)
 
         if event_option == 1:
-            click.secho("Adding new event......",fg="yellow")
-            title =click.prompt("enter event title")
-            description = click.prompt("enter events description")
-            date = click.prompt("enter events date")
-            location = click.prompt("enter events location")
-            try:
-                event_date = datetime.strptime(date, "%d/%m/%Y").date()
-            except ValueError:
-                print(" Date format inavalid")
-        
-            try:
-                add_new_event(title,description,event_date,location)
-                click.secho(f"event{title}added successfully")
-
-            except Exception as e:
-                click.secho(f"error adding event")
-
-        if event_option==2:
-            click.secho("view existing events",fg="green")
+            click.secho("Viewing existing events...", fg="yellow")
             view_all_events()
 
 
-        if event_option==3:
-            click.secho("Delete event",fg="red")
-            title=click.prompt("enter event title")
+
+        elif event_option == 2:
+            click.secho("Adding new event......", fg="yellow")
+            title = click.prompt("Enter event title")
+            description = click.prompt("Enter events description")
+            date = click.prompt("Enter events date (dd/mm/yyyy)")
+            location = click.prompt("Enter events location")
+
+            try:
+                event_date = datetime.strptime(date, "%d/%m/%Y").date()
+                add_new_event(title, description, event_date, location)
+                click.secho(f"Event '{title}' added successfully!", fg="green")
+            except ValueError:
+                click.secho("Invalid Date format. Use dd/mm/yyyy", fg="red")
+            except Exception:
+                click.secho("Error adding event", fg="red")
+
+        elif event_option == 3:
+            click.secho("Delete event", fg="red")
+            title = click.prompt("Enter event title")
             delete_event(title)
-# INPUT 1 END CODE ..........
 
+    # ---------------- PARTICIPANT MENU ----------------
+    elif user_input == 2:
+        click.secho("Participant Options", fg='blue')
+        click.secho("1 Add Participant", fg='yellow')
+        click.secho("2 View Participants", fg='yellow')
+        click.secho("3 Delete Participant", fg='yellow')
 
-#INPUT 2 = MATTERS ORGANIZATION
-    if user_input==2:
+        participant_option = click.prompt("Select participant option", type=int)
+
+        if participant_option == 1:
+            name = click.prompt("Enter participant name")
+            email = click.prompt("Enter participant email")
+            phone = click.prompt("Enter participant phone")
+            age = click.prompt("Enter participant age")
+            add_participant(name, email, phone,age)
+            click.secho("PARTICIPANT ADDED SUCCESSFULLY",fg="green")
+        elif participant_option == 2:
+            view_all_participants()
+        elif participant_option == 3:
+            pid = click.prompt("Enter participant ID", type=int)
+            delete_participant(pid)
+
+    # ---------------- ORGANIZER MENU ----------------
+    elif user_input == 3:
         click.secho("Organizer Options", fg='blue')
-        click.secho("1 Add New Organizer", fg='yellow')
-        click.secho("2 View  Organizers", fg='yellow')
+        click.secho("1 Add Organizer", fg='yellow')
+        click.secho("2 View Organizers", fg='yellow')
         click.secho("3 Delete Organizer", fg='yellow')
 
-        organizer_option=click.prompt("Organizers option",type=int)
+        organizer_option = click.prompt("Select organizer option", type=int)
+
         if organizer_option == 1:
-            click.secho("Adding new organizer......",fg="yellow")
-            name =click.prompt("enter organizers name")
-            email = click.prompt("enter organizers email")
-            phone = click.prompt("enter organizers phone")
-            organization = click.prompt("enter organizers organization")
-        try:
-                add_new_organizer(name,email,phone,organization)
-                click.secho(f"organizer with the name {name} added successfully")
-
-        except Exception as e:
-                click.secho(f"error adding organizer")
-
-
-        if organizer_option==2:
-            click.secho("view existing organizers",fg="green")
+            name = click.prompt("Enter organizer name")
+            email = click.prompt("Enter organizer email")
+            phone = click.prompt("Enter organizer phone")
+            organization = click.prompt("Enter organization")
+            add_organizer(name, email, phone, organization)
+        elif organizer_option == 2:
             view_all_organizers()
-        
-        if organizer_option==3:
-            click.secho("Delete organizer",fg="red")
-            organizer_id=click.prompt("enter organizers id" ,type=int)
-            delete_organizer(organizer_id)
-# INPUT 2 END CODE ...................
+        elif organizer_option == 3:
+            oid = click.prompt("Enter organizer ID", type=int)
+            delete_organizer(oid)
+
+    # ---------------- EVENT PARTICIPANT MENU ----------------
+
+    elif user_input == 4:
+        click.secho("Event Participants Options", fg='blue')
+        click.secho("1 Assign Participant to Event", fg='yellow')
+
+        ep_option = click.prompt("Select event participant option", type=int)
+
+        if ep_option == 1:
+            event_id = click.prompt("Enter event ID", type=int)
+            participant_id = click.prompt("Enter participant ID", type=int)
+            role = click.prompt("Enter role (e.g., Speaker, Attendee, Volunteer)")
+            registration_date_str = click.prompt("Enter registration date (DD-MM-YYYY)")
+
+        try:
             
-
-# INPUT 3 = PARTICIPANT 
-
-    if user_input == 3 :
-        click.secho("Welcome to participants option")
-        click.secho("1 Add participant ",fg="green")
-        click.secho("2 view participants",fg="green")
-        click.secho("3 Delete participant ",fg="green")
-
-        particpant_option = click.prompt("enter option",type=int)
-
-
-        if particpant_option ==1:
-            click.secho("adding new participant ............",fg="yellow")
-            name=click.prompt("enter participants name ")
-            email=click.prompt("enter participants email")
-            phone=click.prompt("enter participants phone")
-            age=click.prompt("enter participants age")
-        try:
-            add_new_participant(name,email,phone,age)
-            click.secho(f"participant with the name {name} added successfully")
-        except Exception as e:
-            click.secho("error adding participant with the name")
-
-        if particpant_option==2:
-            click.secho("This are all the participants ")
-            view_all_participants()
-
-        if particpant_option ==3:
-            click.secho("Delete participant",fg="red")
-            participant_id=click.prompt("enter participant id" ,type=int)
-            delete_participant(participant_id)
-
-# INPUT 3 END CODE .......................
-
-
-# OPTION 4 EVENT PARTICIPANTS OPTION
-
-    if user_input == 4:
-        click.secho("Welcome to option 4 ")
-        click.secho("1 enter event participant",fg="blue")
-        click.secho("2 view event participants",fg="blue")
-        click.secho("3 delete event participant",fg="blue")
-
-        evp_option=click.prompt("enter option",type=int)
-        if evp_option == 1:
-            click.secho("Adding new participant........")
-            event_id=click.prompt("enter event id")
-            participant_id=click.prompt("enter participant id")
-            role=click.prompt("enter participants role")
-            registration_date=click.prompt("enter the date on which the participant registered")
-    
-        try:
-            add_event_participant(event_id,participant_id,role,registration_date)
-            click.secho("event participant added successfully")
-        except Exception as e:
-            click.secho("not added")
+            registration_date = datetime.strptime(registration_date_str, "%d-%m-%Y").date()
+            add_event_participant(event_id, participant_id, role, registration_date)
+            click.secho("Event participant added successfully!", fg="green")
+        except ValueError:
+            click.secho("Invalid Date format. Use DD-MM-YYYY", fg="red")
 
 
 
-        
+            #--------------------------------EXIT APP -------------------------
 
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-        
-        
+    elif user_input == 5:
+        click.secho("Exiting program...", fg="red")
+        break

@@ -46,7 +46,6 @@ class EventParticipant(Base):
     participant_id = Column(Integer, ForeignKey("participants.id"))
     role = Column(String(20))  # attendee, volunteer, speaker
     registration_date = Column(Date)
-
     event = relationship("Event", back_populates="participants")
     participant = relationship("Participant", back_populates="event_participations")
 
