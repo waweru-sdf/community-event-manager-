@@ -122,6 +122,15 @@ def view_all_events():
         print(f"Organizer ID: {event.organizer_id}")
         print("------------------")
 
+        # Organizer details
+        if event.organizer:
+            print(f" Organizer: {event.organizer.name} ({event.organizer.email})")
+        else:
+            print(" Organizer: None")
+
+        
+        
+    
 def delete_event(title):
     event = session.query(Event).filter_by(title=title).first()
     if not event:
