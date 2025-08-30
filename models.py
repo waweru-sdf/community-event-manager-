@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, Date, ForeignKey,create_engine
+from sqlalchemy import Column, Integer, String, Text, Date, ForeignKey, create_engine
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base
 
 Base = declarative_base()
@@ -33,9 +33,8 @@ class Event(Base):
     description = Column(Text)
     date = Column(Date)
     location = Column(String(100))
-    capacity = Column(Integer, nullable=True)
     organizer_id = Column(Integer, ForeignKey("organizers.id"))
- 
+    capacity = Column(Integer, nullable=True)
 
     organizer = relationship("Organizer", back_populates="events")
     participants = relationship("EventParticipant", back_populates="event")
@@ -46,14 +45,12 @@ class EventParticipant(Base):
     id = Column(Integer, primary_key=True)
     event_id = Column(Integer, ForeignKey("events.id"))
     participant_id = Column(Integer, ForeignKey("participants.id"))
-    role = Column(String(20))  # attendee, volunteer, speaker
+    role = Column(String(20))
     registration_date = Column(Date)
     event = relationship("Event", back_populates="participants")
     participant = relationship("Participant", back_populates="event_participations")
 
-
-engine = create_engine("sqlite:///Events.db",echo=True)
+engine = create_engine("sqlite:///Events.db", echo=True)
 Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 session = Session()
-
