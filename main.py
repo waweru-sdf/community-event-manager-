@@ -35,10 +35,12 @@ while True:
             description = click.prompt("Enter events description")
             date = click.prompt("Enter events date (dd/mm/yyyy)")
             location = click.prompt("Enter events location")
-
+            capacity=click.prompt("enter events capacity")
+            organizer_id=click.prompt("enter organizers id")
+            
             try:
                 event_date = datetime.strptime(date, "%d/%m/%Y").date()
-                add_new_event(title, description, event_date, location)
+                add_new_event(title, description, event_date, location,capacity,organizer_id)
                 click.secho(f"Event '{title}' added successfully!", fg="green")
             except ValueError:
                 click.secho("Invalid Date format. Use dd/mm/yyyy", fg="red")

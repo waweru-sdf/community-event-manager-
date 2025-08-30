@@ -81,13 +81,15 @@ def delete_participant(participant_id):
 
 # -------------------- CRUD OPERATIONS FOR EVENTS -------------------- #
 
-def add_new_event(title, description, date, location, organizer_id=None):
+def add_new_event(title, description, date, location,capacity ,organizer_id=None,):
     new_event = Event(
         title=title,
         description=description,
         date=date,
         location=location,
+        capacity=capacity,
         organizer_id=organizer_id
+        
     )
     session.add(new_event)
     session.commit()

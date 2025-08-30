@@ -33,8 +33,9 @@ class Event(Base):
     description = Column(Text)
     date = Column(Date)
     location = Column(String(100))
-    organizer_id = Column(Integer, ForeignKey("organizers.id"))
     capacity = Column(Integer, nullable=True)
+    organizer_id = Column(Integer, ForeignKey("organizers.id"))
+ 
 
     organizer = relationship("Organizer", back_populates="events")
     participants = relationship("EventParticipant", back_populates="event")
