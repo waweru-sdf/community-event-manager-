@@ -74,7 +74,15 @@ Pipenv
 2. install dependencies 
    
    - pipenv install
-   - pipenv shell
+   - pipenv 
+   
+3. Run migrations 
+
+   - alembic upgrade head
+
+4. Seed database
+
+   - python seed.py
 
 3. Run app 
 
