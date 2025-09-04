@@ -1,8 +1,8 @@
-"""Add capacity column to events
+"""capacity on events
 
-Revision ID: ea75b7b86a17
-Revises: 
-Create Date: 2025-08-30 21:44:17.467722
+Revision ID: a2ca4ce9ee96
+Revises: 9db618fdb97f
+Create Date: 2025-09-04 14:00:07.855768
 
 """
 from typing import Sequence, Union
@@ -12,8 +12,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'ea75b7b86a17'
-down_revision: Union[str, None] = None
+revision: str = 'a2ca4ce9ee96'
+down_revision: Union[str, None] = '9db618fdb97f'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

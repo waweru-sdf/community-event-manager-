@@ -34,7 +34,8 @@ class Event(Base):
     date = Column(Date)
     location = Column(String(100))
     organizer_id = Column(Integer, ForeignKey("organizers.id"))
-    capacity = Column(Integer, nullable=True)
+    capacity = Column(Integer)
+
 
     organizer = relationship("Organizer", back_populates="events")
     participants = relationship("EventParticipant", back_populates="event")
@@ -51,6 +52,6 @@ class EventParticipant(Base):
     participant = relationship("Participant", back_populates="event_participations")
 
 engine = create_engine("sqlite:///Events.db", echo=True)
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 session = Session()
